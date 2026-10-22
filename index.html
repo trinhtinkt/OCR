@@ -1,76 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="referrer" content="no-referrer"><title>OCR Tài Liệu</title>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CCCD Excel">
+<meta name="theme-color" content="#00776a">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CCCD sang Excel</title>
 <style>
-:root{--bg:#ecf8f3;--ink:#052e22;--muted:#3f5f54;--emerald:#047857;--emerald-dark:#064e3b;--emerald-deep:#065f46;--mint:#d1fae5;--line:#b5dccd;--white:#ffffff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg)}
-.wrap{max-width:900px;margin:auto;padding:18px}
-.hero{background:linear-gradient(135deg,var(--emerald-dark),var(--emerald));color:var(--white);border-radius:22px;padding:24px 22px;box-shadow:0 12px 32px #064e3b30}
-.hero h1{font-size:clamp(24px,5vw,34px);margin:0 0 8px}.hero p{margin:0;line-height:1.55}
-.privacy{display:flex;gap:10px;align-items:flex-start;background:var(--mint);border:1px solid #86d4b4;color:var(--emerald-dark);border-radius:14px;padding:12px;margin:16px 0}
-.card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 5px 18px #064e3b10}
-.card h2{font-size:18px;margin:0 0 12px;color:var(--emerald-dark)}
-.row{display:flex;gap:14px;flex-wrap:wrap}
-.btn,label.filebtn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:12px 18px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .08s,box-shadow .08s;text-shadow:0 1px 0 #0003}
-.primary{background:linear-gradient(180deg,#0b8f66,#047857);color:var(--white);box-shadow:0 5px 0 #064e3b,0 9px 14px #064e3b55,inset 0 2px 0 #ffffff40}
-.green{background:linear-gradient(180deg,#087a5b,#064e3b);color:var(--white);box-shadow:0 5px 0 #022c22,0 9px 14px #022c2255,inset 0 2px 0 #ffffff33}
-.soft{background:linear-gradient(180deg,#f0fff8,#b8efd5);color:var(--emerald-dark);box-shadow:0 5px 0 #6fbf9c,0 9px 14px #064e3b30,inset 0 2px 0 #ffffffcc;text-shadow:none}
-.danger{background:linear-gradient(180deg,#fff1f1,#fecaca);color:#7f1d1d;box-shadow:0 5px 0 #d28a8a,0 9px 14px #7f1d1d30,inset 0 2px 0 #ffffffcc;text-shadow:none}
-.btn:active:not(:disabled),label.filebtn:active{transform:translateY(4px);box-shadow:0 1px 0 #0006,inset 0 2px 4px #0003}
-button:disabled{box-shadow:0 3px 0 #0003}
-.btn:focus-visible,label.filebtn:focus-within,select:focus-visible,textarea:focus-visible{outline:3px solid #34d399;outline-offset:2px}
-.filebtn input{display:none}button:disabled{opacity:.45;cursor:not-allowed}input[type=file]{max-width:100%}
-.hint{font-size:13px;color:var(--muted);line-height:1.5}
-.status{margin-top:12px;font-size:14px;white-space:pre-wrap;color:var(--ink)}
-.progress{height:7px;background:#cfe9de;border-radius:99px;overflow:hidden;margin-top:10px}
-.bar{height:100%;width:0;background:var(--emerald);transition:width .2s}
-.preview{display:none;max-width:100%;max-height:320px;object-fit:contain;border-radius:12px;border:1px solid var(--line);margin-top:12px}.preview.show{display:block}
-textarea{width:100%;min-height:260px;border:1px solid #8fc9b0;border-radius:12px;padding:13px;font:17px/1.7 "Times New Roman",Times,serif;color:var(--ink);background:#fbfffd;resize:vertical}
-select{padding:10px;border:1px solid #8fc9b0;border-radius:10px;background:var(--white);color:var(--ink)}
-.small{font-size:12px;color:var(--muted)}
-.foot{padding:8px 2px 28px;color:var(--muted);font-size:12px;line-height:1.6}
-#busy{display:none}#busy.show{display:block}
+/*THEME*/:root{--bg:#eef5f3;--card:#fff;--tx:#10302b;--mu:#5b7a74;--bd:#cfe0db;--pr:#00776a;--prt:#fff;--wa:#b54708;--ok:#067647;--gold:#f2a900;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1f1c;--card:#12302b;--tx:#e6f4f1;--mu:#93b5ae;--bd:#245249;--pr:#14a190;--prt:#fff;--wa:#f79009;--ok:#32d583}}
+:root[data-theme="dark"]{--bg:#0a1f1c;--card:#12302b;--tx:#e6f4f1;--mu:#93b5ae;--bd:#245249;--pr:#14a190;--prt:#fff;--wa:#f79009;--ok:#32d583}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:900px;margin:0 auto;padding:16px}
+.hd{background:linear-gradient(135deg,#00544a,#0b8a7a);border-bottom:4px solid var(--gold);color:#fff}
+.hd .in{max-width:900px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hd h1{color:#fff;font-size:20px;margin:0 0 2px}
+.hd p.s{color:#d4ece7;margin:0}
+.av{width:84px;height:84px;flex:0 0 84px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);background:#0b6e64}
+h1{font-size:20px;margin:4px 0 2px}
+p.s{margin:0 0 12px;color:var(--mu);font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:12px}
+textarea{width:100%;min-height:150px;border:1px solid var(--bd);border-radius:10px;padding:10px;font:15px/1.4 inherit;background:var(--bg);color:var(--tx);resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button,label.b{flex:1 1 140px;min-height:46px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:600 15px inherit;display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}
+button.p{background:var(--pr);color:var(--prt);border-color:var(--pr)}
+button:disabled{opacity:.45}
+input[type=file]{display:none}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;min-width:980px;width:100%;font-size:14px}
+th{background:var(--pr);color:var(--prt);padding:8px;text-align:left;white-space:nowrap}
+td{border-bottom:1px solid var(--bd);padding:2px}
+td input{width:100%;border:0;background:transparent;color:var(--tx);font:14px inherit;padding:8px 6px;min-width:90px}
+td.n{padding:8px;color:var(--mu);text-align:center}
+td input.w{min-width:200px}
+.note{color:var(--wa);font-size:12px;padding:4px 6px}
+#msg{font-size:14px;color:var(--ok);min-height:20px;margin-top:8px}
+#msg.e{color:var(--wa)}
+.x{flex:0 0 40px;min-height:36px;font-size:18px}
 </style>
 </head>
-<body><main class="wrap">
-<header class="hero"><h1>OCR Tài Liệu</h1><p>Đọc văn bản từ ảnh hoặc PDF, chỉnh sửa kết quả rồi xuất Excel/Word.</p><p style="margin-top:10px;font-size:13px">Bản mẫu miễn phí • Mỗi lần xử lý một tệp • Không cần tài khoản</p></header>
-<div class="privacy"><div style="font-size:22px">🔒</div><div><strong>Ưu tiên riêng tư</strong><br><span style="font-size:13px">Ảnh và văn bản được xử lý trong trình duyệt, không có chức năng tải hồ sơ lên máy chủ của ứng dụng. Bản mẫu tải thư viện OCR và mô hình tiếng Việt từ CDN khi cần; xem lưu ý bảo mật ở cuối trang.</span></div></div>
-<section class="card"><h2>1. Chọn một ảnh hoặc PDF</h2><div class="row"><label class="filebtn primary">📷 Chọn ảnh<input id="imageFile" type="file" accept="image/*"></label><label class="filebtn soft">📄 Chọn PDF<input id="pdfFile" type="file" accept="application/pdf,.pdf"></label></div><img id="preview" class="preview" alt="Xem trước tài liệu đã chọn"><div id="fileInfo" class="hint" style="margin-top:8px">Chưa chọn tệp. Ảnh rõ, đủ sáng và chụp thẳng sẽ giúp OCR tốt hơn.</div><div class="row" style="margin-top:14px;align-items:center"><label for="lang"><strong>Ngôn ngữ OCR</strong></label><select id="lang"><option value="vie">Tiếng Việt</option><option value="vie+eng">Tiếng Việt + English</option><option value="eng">English</option></select><button id="run" class="btn green" disabled>Nhận dạng văn bản</button><button id="clear" class="btn danger">Xóa dữ liệu tạm</button></div><div id="busy"><div class="progress"><div id="bar" class="bar"></div></div></div><div id="status" class="status" role="status" aria-live="polite"></div></section>
-<section class="card"><h2>2. Kiểm tra và chỉnh sửa văn bản</h2><p class="hint">Sửa trực tiếp nội dung bên dưới. Bản mẫu xuất văn bản theo dòng; chưa tự phân loại chính xác các trường căn cước/sổ đỏ.</p><textarea id="result" placeholder="Kết quả OCR sẽ xuất hiện ở đây…" spellcheck="false"></textarea><div class="row" style="margin-top:12px"><button id="xlsx" class="btn primary" disabled>⬇ Xuất Excel (.xlsx)</button><button id="word" class="btn green" disabled>⬇ Xuất Word (.docx)</button><button id="txt" class="btn soft" disabled>⬇ Xuất TXT</button></div><p class="small">Excel: mỗi dòng văn bản là một cột, xếp từ trái sang phải. Word: tài liệu có thể mở bằng Microsoft Word. Không có dữ liệu nào được lưu thành lịch sử trong ứng dụng.</p></section>
-<section class="card"><h2>3. Lưu ý về quyền riêng tư</h2><ul class="hint"><li>Ứng dụng không có backend, tài khoản, cơ sở dữ liệu hay tính năng tải ảnh lên máy chủ.</li><li>Để chạy OCR, trình duyệt cần tải thư viện và mô hình ngôn ngữ từ CDN. Những yêu cầu này tải mã/mô hình, không phải ảnh giấy tờ hay văn bản OCR.</li><li>Vì vậy đây là bản mẫu xử lý tại thiết bị nhưng chưa phải bản ngoại tuyến hoàn toàn. Nếu cần không kết nối bên thứ ba ngay cả để tải thư viện/mô hình, cần đóng gói thư viện và mô hình vào bản cài đặt riêng rồi kiểm thử mạng.</li><li>Khi đóng hoặc tải lại trang, nội dung chưa xuất sẽ mất. Khi bấm xuất, file chỉ được tải về thiết bị theo thao tác của bạn.</li><li>OCR có thể đọc sai số định danh, ngày tháng, số thửa hoặc diện tích. Luôn đối chiếu ảnh gốc trước khi sử dụng.</li></ul></section>
-<footer class="foot">Bản mẫu minh họa, không phải dịch vụ OCR đã được kiểm định. Không dùng làm căn cứ pháp lý nếu chưa đối chiếu bản gốc. Với giấy tờ thật, chỉ sử dụng khi bạn chấp thuận việc tải thư viện/mô hình từ CDN; để bảo mật nghiêm ngặt hơn, hãy dùng bản được đóng gói hoàn toàn ngoại tuyến.</footer>
+<body>
+<header class="hd"><div class="in"><div><h1>CCCD sang Excel</h1>
+<p class="s">Dán chữ từ màn hình thông tin CCCD (hoặc chọn file .txt), bấm Quét, sửa lại nếu cần rồi tải Excel.</p></div>
+<img class="av" alt="" src="data:image/jpeg;base64,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"></div></header>
+<main>
+
+<div class="card">
+<textarea id="in" placeholder="Dán nội dung vào đây. Có thể dán nhiều người một lúc."></textarea>
+<div class="row">
+<button class="p" id="go">Quét và thêm vào bảng</button>
+<label class="b">Chọn file .txt<input type="file" id="f" accept=".txt,text/plain" multiple></label>
+</div>
+<div id="msg"></div>
+</div>
+
+<div class="card">
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Họ và tên</th><th>Ngày sinh</th><th>Giới tính</th><th>Số CCCD</th><th>Số CMND</th><th>Ngày cấp</th><th>Ngày hết hạn</th><th>Địa chỉ</th><th>Ghi chú</th><th></th></tr></thead>
+<tbody id="tb"></tbody>
+</table></div>
+<p class="s" id="empty" style="margin:10px 0 0">Chưa có dữ liệu.</p>
+<div class="row">
+<button class="p" id="dl" disabled>Tải file Excel</button>
+<button id="clr" disabled>Xóa hết</button>
+</div>
+</div>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-(()=>{
-const $=id=>document.getElementById(id);let selectedFile=null,objectUrl=null,pdfDoc=null;
-const setStatus=t=>$('status').textContent=t;
-const enable=()=>{const ok=$('result').value.trim().length>0;$('xlsx').disabled=!ok;$('word').disabled=!ok;$('txt').disabled=!ok};
-function clearData(){selectedFile=null;pdfDoc=null;if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null}$('imageFile').value='';$('pdfFile').value='';$('preview').removeAttribute('src');$('preview').classList.remove('show');$('fileInfo').textContent='Chưa chọn tệp. Ảnh rõ, đủ sáng và chụp thẳng sẽ giúp OCR tốt hơn.';$('result').value='';enable();$('run').disabled=true;$('busy').classList.remove('show');$('bar').style.width='0';setStatus('Đã xóa dữ liệu tạm khỏi giao diện.');}
-function pick(file){if(!file)return;if(file.size>25*1024*1024){setStatus('Tệp lớn hơn 25 MB. Hãy chọn tệp nhỏ hơn.');return}selectedFile=file;$('run').disabled=false;$('fileInfo').textContent=`Đã chọn: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(file);if(file.type.startsWith('image/')){$('preview').src=objectUrl;$('preview').classList.add('show')}else{$('preview').classList.remove('show');$('preview').removeAttribute('src')}setStatus('Tệp chỉ được giữ trong bộ nhớ của trang để xử lý.');}
-$('imageFile').addEventListener('change',e=>{ $('pdfFile').value='';pick(e.target.files[0])});$('pdfFile').addEventListener('change',e=>{$('imageFile').value='';pick(e.target.files[0])});$('clear').addEventListener('click',clearData);$('result').addEventListener('input',enable);
-async function loadScript(src){return new Promise((resolve,reject)=>{let s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error('Không tải được thư viện: '+src));document.head.appendChild(s)})}
-async function imageFromPdf(file){if(!window.pdfjsLib){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'}const bytes=await file.arrayBuffer();const doc=await pdfjsLib.getDocument({data:bytes}).promise;let all=[];for(let p=1;p<=doc.numPages;p++){setStatus(`Đang dựng trang ${p}/${doc.numPages} của PDF…`);const page=await doc.getPage(p);const viewport=page.getViewport({scale:2});const canvas=document.createElement('canvas');canvas.width=viewport.width;canvas.height=viewport.height;await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;all.push(canvas)}return all}
-$('run').addEventListener('click',async()=>{if(!selectedFile)return;$('run').disabled=true;$('busy').classList.add('show');$('bar').style.width='5%';setStatus('Đang chuẩn bị OCR. Lần đầu có thể cần tải thư viện và mô hình ngôn ngữ.');try{if(!window.Tesseract)await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');const worker=await Tesseract.createWorker($('lang').value,1,{logger:m=>{if(m.status){setStatus('OCR: '+m.status+(m.progress!=null?' '+Math.round(m.progress*100)+'%':''));if(m.progress!=null)$('bar').style.width=Math.max(5,Math.round(m.progress*90))+'%'}}});let items=[];if(selectedFile.type==='application/pdf'||selectedFile.name.toLowerCase().endsWith('.pdf')){const pages=await imageFromPdf(selectedFile);for(let i=0;i<pages.length;i++){setStatus(`Đang nhận dạng trang ${i+1}/${pages.length}…`);const r=await worker.recognize(pages[i]);items.push(`--- Trang ${i+1} ---\n${r.data.text.trim()}`);pages[i].width=1;pages[i].height=1;pages[i]=null;}}else{const r=await worker.recognize(selectedFile);items.push(r.data.text.trim())}await worker.terminate();$('result').value=items.join('\n\n').trim();enable();$('bar').style.width='100%';setStatus('Hoàn tất. Hãy kiểm tra và sửa nội dung trước khi xuất file.');}catch(err){setStatus('Không thể OCR: '+err.message+'\nKiểm tra kết nối internet (cần tải thư viện/mô hình) hoặc thử ảnh khác.')}finally{$('run').disabled=!selectedFile;$('busy').classList.remove('show')}});
-function lines(){return $('result').value.replace(/\r/g,'').split('\n').map(x=>x.trim()).filter(Boolean)}
-$('xlsx').addEventListener('click',async()=>{try{if(!window.XLSX)await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');const L=lines().slice(0,16384);const rows=[L.map((_,i)=>'Dòng '+(i+1)),L];const wb=XLSX.utils.book_new();const ws=XLSX.utils.aoa_to_sheet(rows);ws['!cols']=L.map(()=>({wch:30}));XLSX.utils.book_append_sheet(wb,ws,'Van ban OCR');XLSX.writeFile(wb,'ket_qua_ocr.xlsx');}catch(e){setStatus('Không xuất được Excel: '+e.message)}});
-$('word').addEventListener('click',async()=>{try{if(!window.JSZip)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
-const esc=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,'');
-const para=(t,b)=>`<w:p><w:pPr><w:spacing w:after="120" w:line="360" w:lineRule="auto"/></w:pPr><w:r>${b?'<w:rPr><w:b/><w:sz w:val="32"/></w:rPr>':''}<w:t xml:space="preserve">${esc(t)}</w:t></w:r></w:p>`;
-const body=[para('Kết quả OCR',true)].concat($('result').value.replace(/\r/g,'').split('\n').map(l=>para(l,false))).join('');
-const NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
-const H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-const zip=new JSZip();
-zip.file('[Content_Types].xml',H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>');
-zip.file('_rels/.rels',H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
-zip.file('word/_rels/document.xml.rels',H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>');
-zip.file('word/styles.xml',H+'<w:styles '+NS+'><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="vi-VN"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>');
-zip.file('word/document.xml',H+'<w:document '+NS+'><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1701" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>');
-const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
-download(blob,'ket_qua_ocr.docx')}catch(e){setStatus('Không xuất được Word: '+e.message)}});
-$('txt').addEventListener('click',()=>download(new Blob(['\ufeff',$('result').value],{type:'text/plain;charset=utf-8'}),'ket_qua_ocr.txt'));
-function download(blob,name){const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-window.addEventListener('pagehide',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);selectedFile=null;$('result').value=''});
-})();
-</script></body></html>
+const L={
+cccd:"S[ỐO]\\s*CCCD|S[ỐO]\\s*CĂN\\s*CƯỚC",
+cmnd:"S[ốo]\\s*CMND|S[ốo]\\s*CMT",
+ten:"H[ọo]\\s*(?:và|va)\\s*t[êe]n",
+gioitinh:"Gi[ớo]i\\s*t[íi]nh",
+ngaysinh:"Ng[àa]y\\s*sinh",
+diachi:"N[ơo]i\\s*th[ưu][ờơo]ng\\s*tr[úu]|Đ[ịi]a\\s*ch[ỉi]",
+ngaycap:"Ng[àa]y\\s*c[ấa]p(?:\\s*CCCD)?",
+hethan:"Ng[àa]y\\s*h[ếe]t\\s*h[ạa]n|Có\\s*gi[áa]\\s*tr[ịi]\\s*đ[ếe]n"
+};
+const ALL=Object.values(L).map(p=>"(?:"+p+")").join("|");
+const STOP="(?=(?:"+ALL+")|Thông tin này|Chia s|$)";
+const rx={};for(const k in L)rx[k]=new RegExp("(?:"+L[k]+")\\s*[:\\n ]\\s*([\\s\\S]+?)"+STOP,"iu");
+const pad=n=>String(n).padStart(2,"0");
+
+function field(t,k){const m=t.match(rx[k]);return m?m[1].replace(/\s+/g," ").replace(/^[\s:,]+|[\s:,]+$/g,""):""}
+function nd(s){const m=(s||"").match(/(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/);return m?pad(m[1])+"/"+pad(m[2])+"/"+m[3]:""}
+function td(s){const m=s.match(/^(\d+)\/(\d+)\/(\d+)$/);return m?{d:+m[1],m:+m[2],y:+m[3]}:null}
+function expiry(dob,iss){
+ const b=td(dob),i=td(iss);if(!b||!i)return"";
+ const age=i.y-b.y-((i.m<b.m||(i.m===b.m&&i.d<b.d))?1:0);
+ for(const mk of [25,40,60])if(age<mk){let y=b.y+mk,m=b.m,d=b.d;
+  if(m===2&&d===29&&!(new Date(y,1,29).getMonth()===1)){m=3;d=1}
+  return pad(d)+"/"+pad(m)+"/"+y}
+ return"Không thời hạn";
+}
+function parse(text){
+ text=text.replace(/\r/g,"");
+ const cr=new RegExp("(?=(?:"+L.cccd+"))","iu"),ck=new RegExp(L.cccd,"iu");
+ let blocks=text.split(cr).filter(b=>ck.test(b));
+ if(!blocks.length)blocks=[text];
+ return blocks.map(b=>{
+  const r={};for(const k in L)r[k]=field(b,k);
+  r.cccd=r.cccd.replace(/\D/g,"");r.cmnd=r.cmnd.replace(/\D/g,"");
+  if(!r.cccd){const m=b.match(/\b(\d{4}\s?\d{4}\s?\d{4})\b/);r.cccd=m?m[1].replace(/\D/g,""):""}
+  r.ngaysinh=nd(r.ngaysinh);r.ngaycap=nd(r.ngaycap);
+  let ex=nd(r.hethan),notes=[],auto="";
+  if(!ex){ex=expiry(r.ngaysinh,r.ngaycap);if(ex)auto="Hạn tự tính theo mốc tuổi 25/40/60"}
+  r.hethan=ex;
+  if(r.cccd&&r.cccd.length!==12)notes.push("Số CCCD không đủ 12 số");
+  if(r.cmnd&&![9,12].includes(r.cmnd.length))notes.push("Số CMND bất thường");
+  [["ten","họ tên"],["ngaysinh","ngày sinh"],["diachi","địa chỉ"]].forEach(([k,n])=>{if(!r[k])notes.push("thiếu "+n)});
+  if(auto)notes.push(auto);
+  r.ghichu=notes.join("; ");
+  return r;
+ });
+}
+
+const KEYS=["ten","ngaysinh","gioitinh","cccd","cmnd","ngaycap","hethan","diachi","ghichu"];
+const HEAD=["STT","Họ và tên","Ngày sinh","Giới tính","Số CCCD","Số CMND","Ngày cấp","Ngày hết hạn","Địa chỉ","Ghi chú"];
+let rows=[];
+const $=id=>document.getElementById(id);
+function say(t,e){const m=$("msg");m.textContent=t;m.className=e?"e":""}
+
+function render(){
+ const tb=$("tb");tb.textContent="";
+ rows.forEach((r,i)=>{
+  const tr=document.createElement("tr");
+  const n=document.createElement("td");n.className="n";n.textContent=i+1;tr.appendChild(n);
+  KEYS.forEach(k=>{
+   const td=document.createElement("td"),inp=document.createElement("input");
+   inp.value=r[k]||"";if(k==="diachi"||k==="ghichu")inp.className="w";
+   if(["cccd","cmnd"].includes(k))inp.inputMode="numeric";
+   inp.addEventListener("input",()=>{r[k]=inp.value});
+   td.appendChild(inp);tr.appendChild(td);
+  });
+  const d=document.createElement("td"),b=document.createElement("button");
+  b.className="x";b.textContent="×";b.setAttribute("aria-label","Xóa dòng");
+  b.onclick=()=>{rows.splice(i,1);render()};d.appendChild(b);tr.appendChild(d);
+  tb.appendChild(tr);
+ });
+ $("empty").style.display=rows.length?"none":"block";
+ $("dl").disabled=$("clr").disabled=!rows.length;
+}
+
+function add(text){
+ const got=parse(text).filter(r=>r.cccd||r.cmnd||r.ten);
+ if(!got.length){say("Không tìm thấy thông tin CCCD trong nội dung này.",1);return 0}
+ rows=rows.concat(got);render();return got.length;
+}
+$("go").onclick=()=>{
+ const t=$("in").value.trim();if(!t){say("Hãy dán nội dung trước.",1);return}
+ const n=add(t);if(n){say("Đã thêm "+n+" dòng.");$("in").value=""}
+};
+$("f").onchange=async e=>{
+ let n=0;
+ for(const f of e.target.files){try{n+=add(await f.text())}catch(x){}}
+ if(n)say("Đã thêm "+n+" dòng từ file.");
+ e.target.value="";
+};
+$("clr").onclick=()=>{rows=[];render();say("")};
+function saveBlob(name,blob){
+ const u=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(u),4000);
+}
+$("dl").onclick=()=>{
+ try{
+  if(window.XLSX){
+   const aoa=[HEAD].concat(rows.map((r,i)=>[i+1].concat(KEYS.map(k=>String(r[k]||"")))));
+   const ws=XLSX.utils.aoa_to_sheet(aoa);
+   ws["!cols"]=[5,22,12,9,16,14,12,14,42,34].map(w=>({wch:w}));
+   const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"CCCD");
+   const buf=XLSX.write(wb,{bookType:"xlsx",type:"array"});
+   saveBlob("ket_qua_cccd.xlsx",new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}));
+   say("Đã tạo file Excel.");
+  }else{
+   // Không có mạng để tải thư viện Excel: xuất CSV (Excel mở được, giữ tiếng Việt)
+   const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+   const lines=[HEAD.map(q).join(",")].concat(rows.map((r,i)=>[i+1].concat(KEYS.map(k=>"\t"+(r[k]||""))).map(q).join(",")));
+   saveBlob("ket_qua_cccd.csv",new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"}));
+   say("Chưa có mạng nên đã xuất file CSV (mở được bằng Excel).",1);
+  }
+ }catch(err){say("Không tạo được file. Thử lại sau.",1)}
+};
+render();
+</script>
+</body>
+</html>
